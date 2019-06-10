@@ -1,0 +1,74 @@
+def checkgamestatus(board_position,pos):
+    for i in range(0,3):
+        j = i*3
+        if(board_position[j] == board_position[j+1] and board_position[j] == board_position[j+2]):
+            print(j)
+            return True
+        if(board_position[i] == board_position[i+3] and board_position[i] == board_position[i+6]):
+            print(j)
+            return True
+    if(board_position[6] == board_position[4] and board_position[4] == board_position[2]):
+        return True
+    if(board_position[0] == board_position[4] and board_position[4] == board_position[8]):
+        return True
+    return False
+    
+
+def check(pos,board_position):
+    if(board_position[pos] == 'X' or board_position[pos] == 'O'):
+        return False
+    return True    
+    
+def board(board_position):
+    print (board_position[6] + "|" + board_position[7] + "|" + board_position[8])
+    print (board_position[3] + "|" + board_position[4] + "|" + board_position[5])
+    print (board_position[0] + "|" + board_position[1] + "|" + board_position[2])
+
+player1_marker = ""
+player2_marker = ""
+
+board_position = ['1','2','3','4','5','6','7','8','9']
+
+while player1_marker != 'X' and player1_marker !='O':
+    player1_marker = input("Enter X or O")
+
+if player1_marker == 'X':
+    player2_marker = 'O';
+else:
+    player2_marker = 'X';
+    
+print ("Player1:{}".format(player1_marker));
+print ("Player2:{}".format(player2_marker));
+
+board(board_position)
+winner = 'tie'
+i = 0 
+game = False
+nextplayer = 'player1'
+while not(game) and i <=8:
+    pos = int(input('Enter position'))
+    pos = pos-1
+    
+    if nextplayer == 'player1' and check(pos,board_position):
+        print(game)
+        board_position[pos] = player1_marker
+        board(board_position)
+        game = checkgamestatus(board_position,pos)
+        print(game)
+        if game:
+            print("Winner:{} ".format(nextplayer))
+            break;    
+        nextplayer = 'player2'
+        i+=1
+    elif nextplayer == 'player2' and check(pos,board_position):
+        board_position[pos] = player2_marker
+        game = checkgamestatus(board_position,pos)
+        board(board_position)
+        if game:
+            print("Winner:{} ".format(nextplayer))
+            break;
+        nextplayer = 'player1'
+        i+=1
+        
+if not(game):
+    print("its a tie")
