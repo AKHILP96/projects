@@ -54,7 +54,6 @@ while not(game) and i <=8:
         board_position[pos] = player1_marker
         board(board_position)
         game = checkgamestatus(board_position,pos)
-        print(game)
         if game:
             print("Winner:{} ".format(nextplayer))
             break;    
