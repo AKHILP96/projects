@@ -46,7 +46,7 @@ i = 0
 game = False
 nextplayer = 'player1'
 while not(game) and i <=8:
-    pos = int(input('Enter position'))
+    pos = int(input('Enter position :{}'.format(nextplayer)))
     pos = pos-1
     
     if nextplayer == 'player1' and check(pos,board_position):
